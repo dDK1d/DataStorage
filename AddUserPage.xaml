@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DataStorage.AddUserPage"
+             Title="Добавление пользователя">
+    <ScrollView>
+        <StackLayout Padding="10" 
+                         Margin="0,10">
+            <Entry Placeholder="ФИО" 
+                   x:Name="fullNameEntry">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" 
+                                 Binding="{Binding Source={x:Reference fullNameEntry}, Path=Text.Length}" 
+                                 Value="0">
+                        <Setter Property="BackgroundColor" 
+                                Value="LightCoral"/>
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Picker Title="Пол" 
+                        x:Name="genderPicker">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Мужской</x:String>
+                        <x:String>Женский</x:String>
+                        <x:String>Другой</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Entry Placeholder="Возраст" 
+                       x:Name="ageEntry" 
+                       Keyboard="Numeric">
+                <Entry.Triggers>
+                    <DataTrigger TargetType="Entry" 
+                                 Binding="{Binding Source={x:Reference ageEntry}, Path=Text.Length}" 
+                                 Value="0">
+                        <Setter Property="BackgroundColor" 
+                                Value="LightCoral" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Entry" 
+                                 Binding="{Binding Source={x:Reference ageEntry}, Path=Text.Length}" 
+                                 Value="15">
+                        <Setter Property="BackgroundColor" 
+                                Value="LightGreen" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Entry" 
+                                 Binding="{Binding Source={x:Reference ageEntry}, Path=Text.Length}" 
+                                 Value="50">
+                        <Setter Property="BackgroundColor" 
+                                Value="LightGreen" />
+                    </DataTrigger>
+                </Entry.Triggers>
+            </Entry>
+            <Button Text="Выбрать фото" 
+                    Clicked="btn_SelectPhoto_Clicked"/>
+            <Image x:Name="userPhoto" 
+                       WidthRequest="100" 
+                       HeightRequest="100" 
+                       Margin="0,10" 
+                       Source="default_photo.png"/>
+
+            <Label x:Name="gradeLabel" />
+            <Slider x:Name="gradeSlider" 
+                    Minimum="2" 
+                    Maximum="5" 
+                    Value="2" 
+                    ValueChanged="SliderValue_Changed" />
+
+            <Label Text="Нужно ли общежитие?" />
+            <StackLayout Orientation="Horizontal">
+                <Switch x:Name="dormSwitch" 
+                        Toggled="Sw_DormSwitch"/>
+                <Label x:Name="dormSwitchLabel" 
+                       Text="Нет" 
+                       VerticalOptions="Center" />
+            </StackLayout>
+
+            <Label Text="Является ли старостой?" />
+            <StackLayout Orientation="Horizontal">
+                <Switch x:Name="leaderSwitch" 
+                        Toggled="Sw_LeaderSwitch"/>
+                <Label x:Name="leaderSwitchLabel" 
+                       Text="Нет" 
+                       VerticalOptions="Center" />
+            </StackLayout>
+            
+            <Button Text="Сохранить" 
+                    Clicked="btn_Save_Clicked"
+                    Margin="0,10" />
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
